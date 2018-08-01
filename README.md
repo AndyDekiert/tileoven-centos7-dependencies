@@ -1,7 +1,13 @@
 # tileoven-centos7-dependencies
 Dependencies to build and install Tileoven on Centos 7.5.
 
-Before building [Tileoven](https://github.com/andydekiert/tileoven) on Centos 7.5 you will need to build and install these dependencies. This repository will allow you to conveniently download versions of Mapnik and NodeJS which have been used to successfully build Tileoven on CentOS. Suggestion is to clone this repository to your `~/Downloads` folder, follow the instructions below and finally delete the repo from your drive again, as it will no longer be needed.
+Before building [Tileoven](https://github.com/andydekiert/tileoven) on Centos 7.5 you will need to build and install these dependencies. This repository will allow you to conveniently download versions of Mapnik and NodeJS which have been used to successfully build Tileoven on CentOS. Suggestion is to clone this repository to your `~/Downloads` directory, follow the instructions below and finally delete the repo from your drive again, as it will no longer be needed.
+
+To clone to your `~/Downloads` directory:
+```
+cd ~/Downloads
+git clone https://github.com/andydekiert/tileoven-centos7-dependencies
+```
 
 ## Build and install Mapnik 2.2.0
 1. Start by installing the build dependencies of Mapnik 2.2.0:
