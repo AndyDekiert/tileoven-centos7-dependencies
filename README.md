@@ -37,7 +37,7 @@ git clone https://github.com/andydekiert/tileoven-centos7-dependencies
    make test
    ```
    It's likely that there will be some so called errors.
-   Reason: Mapnik test renders some predefines tiles and compares them pixel-by-pixel to reference tiles. Usually there are a few pixels different but still indistinguishable for a human. Just check the output and follow the instructions to check the HTML test report which will be generated.
+   Reason: Mapnik test renders some predefined tiles and compares them pixel-by-pixel to reference tiles. Usually there are a few pixels different but for a human the entire image is still indistinguishable from the reference. Just check the output and follow the instructions to review the HTML test report which will be generated.
 
 
 ## Build and install NodeJS 6.9.1
