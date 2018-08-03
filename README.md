@@ -1,7 +1,7 @@
 # tileoven-centos7-dependencies
-Dependencies to build and install Tileoven on Centos 7.5.
+Dependencies to build and install TileOven on Centos 7.5.
 
-Before building [Tileoven](https://github.com/andydekiert/tileoven) on Centos 7.5 you will need to build and install these dependencies. This repository will allow you to conveniently download versions of Mapnik and NodeJS which have been used to successfully build Tileoven on CentOS. Suggestion is to clone this repository to your `~/Downloads` directory, follow the instructions below and finally delete the repo from your drive again, as it will no longer be needed.
+Before building [TileOven](https://github.com/andydekiert/tileoven) on Centos 7.5 you will need to build and install these dependencies. This repository will allow you to conveniently download versions of Mapnik and NodeJS which have been used to successfully build Tileoven on CentOS. Suggestion is to clone this repository to your `~/Downloads` directory, follow the instructions below and finally delete the repo from your drive again, as it will no longer be needed.
 
 To clone to your `~/Downloads` directory:
 ```
@@ -9,8 +9,8 @@ cd ~/Downloads
 git clone https://github.com/andydekiert/tileoven-centos7-dependencies
 ```
 
-## Build and install Mapnik 2.2.0
-1. Start by installing the build dependencies of Mapnik 2.2.0:
+## Build and install Mapnik 3.0.20
+1. Start by installing the build dependencies of Mapnik 3.0.20:
    ```
    yum install postgresql-devel sqlite-devel
    yum install cairo-devel pycairo-devel
@@ -20,19 +20,31 @@ git clone https://github.com/andydekiert/tileoven-centos7-dependencies
    yum install libtiff-devel libpng-devel libjpeg-devel
    yum install libicu-devel
    yum install libxml2-devel xml2
+   yum install libwebp-devel
    yum install freetype-devel
    ```
-
-2. Next: Extract `mapnik-v2.2.0.tar.bz2` to a location of your liking, e.g. `/usr/local/src`.
-
-3. Build and install Mapnik. Open a terminal and navigate to where you just extracted the tarball. Then execute with root privileges:
+   
+2. Install a more up-to-date compiler using the SCL feature of CentOS:
    ```bash
-   ./configure
+   yum install centos-release-scl
+   yum install devtoolset-7
+   scl enable devtoolset-7 bash
+   gcc --version
+   ```
+   GCC version should be > 7.3.1 now. Although Mapnik and later node-mapnik only need gcc > 5. 
+
+3. Next: Extract `mapnik-v3.0.20-modified.tar.bz2` to a location of your liking, e.g. `/usr/local/src`.
+
+   On my system I had to edit the make file for a successfull build. Following the instructions from a similiar [issue](https://github.com/mapnik/mapnik/issues/3384) I edited the `makefile`. The tarball already contains that change - hence the "modified".
+
+5. Build and install Mapnik. Open a terminal and navigate to where you just extracted the tarball. Then execute with root privileges:
+   ```bash
+   ./configure --with-libraries=all
    make
    make install
    ```
    
-4. Test Mapnik
+6. Test Mapnik
    ```bash
    make test
    ```
