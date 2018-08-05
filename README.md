@@ -23,6 +23,10 @@ git clone https://github.com/andydekiert/tileoven-centos7-dependencies
    yum install libwebp-devel
    yum install freetype-devel
    ```
+   Single command:
+   ```bash
+   yum install postgresql-devel sqlite-devel cairo-devel pycairo-devel gdal-devel boost-devel boost proj-devel proj-epsg libtiff-devel libpng-devel libjpeg-devel libicu-devel libxml2-devel xml2 libwebp-devel freetype-devel
+   ```
    
 2. Install a more up-to-date compiler using the SCL feature of CentOS:
    ```bash
