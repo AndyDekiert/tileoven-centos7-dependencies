@@ -26,35 +26,39 @@ git clone https://github.com/andydekiert/tileoven-centos7-dependencies
    Single command:
    ```bash
    yum install postgresql-devel sqlite-devel cairo-devel pycairo-devel gdal-devel boost-devel boost proj-devel proj-epsg libtiff-devel libpng-devel libjpeg-devel libicu-devel libxml2-devel xml2 libwebp-devel freetype-devel harfbuzz-devel
-   ```
+   ```  
+
+2. Next: Extract `mapnik-v3.0.20-modified.tar.bz2` to a location of your liking, e.g. `/usr/local/src`.
+
+   On my system I had to edit the make file for a successfull build. Following the instructions from a similiar [issue](https://github.com/mapnik/mapnik/issues/3384) I edited the `makefile`. The tarball already contains that change - hence the "modified".
    
-2. Install a more up-to-date compiler using the SCL feature of CentOS:
+3. Install a more up-to-date compiler using the SCL feature of CentOS:
    ```bash
    yum install centos-release-scl
    yum install devtoolset-7
    scl enable devtoolset-7 bash
    gcc --version
    ```
-   GCC version should be > 7.3.1 now. Although Mapnik and later node-mapnik only need gcc > 5. 
+   GCC version should be >= 7.3.1 now. Although Mapnik and later node-mapnik only need gcc > 5. To later disable `devtoolset-7` and return to the default gcc version of CentOS, simply `exit` the current terminal session.
 
-3. Next: Extract `mapnik-v3.0.20-modified.tar.bz2` to a location of your liking, e.g. `/usr/local/src`.
-
-   On my system I had to edit the make file for a successfull build. Following the instructions from a similiar [issue](https://github.com/mapnik/mapnik/issues/3384) I edited the `makefile`. The tarball already contains that change - hence the "modified".
-
-5. Build and install Mapnik. Open a terminal and navigate to where you just extracted the tarball. Then execute with root privileges:
+4. Build and install Mapnik. Open a terminal and navigate to where you just extracted the tarball. Then execute with root privileges:
    ```bash
    ./configure --with-libraries=all
    make
    make install
    ```
    
-6. Test Mapnik
+5. Test Mapnik
    ```bash
    make test
    ```
    It's likely that there will be some so called errors.
    Reason: Mapnik test renders some predefined tiles and compares them pixel-by-pixel to reference tiles. Usually there are a few pixels different but for a human the entire image is still indistinguishable from the reference. Just check the output and follow the instructions to review the HTML test report which will be generated.
 
+6. Restore default gcc version of CentOS, because NodeJS 6.9.1 is incompatible with gcc 7, see this [issue](https://github.com/nodejs/help/issues/664).
+   ```bash
+   exit
+   ```
 
 ## Build and install NodeJS 6.9.1
 1. Extract `node-v6.9.1.tar.gz` to a location of your liking, e.g. `/usr/local/src`.
